@@ -35,7 +35,6 @@ jobs:
       - name: 📦 Setting up mephisto-task package
         run: |
           cd packages/mephisto-task
-          npm link
 
       - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
