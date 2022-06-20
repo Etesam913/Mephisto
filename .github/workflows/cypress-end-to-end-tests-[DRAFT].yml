@@ -32,14 +32,10 @@ jobs:
         run: |
           mephisto config core.main_data_directory ~/mephisto/data
 
-      #- name: 📦 Setting up mephisto-task package
-      #  run: |
-      #    cd packages/mephisto-task
-
       - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
         with:
-          install: yarn install --immutable
+          install: false
           project: ./examples/static_react_task/webapp
           config-file: cypress.config.js
           start: python examples/static_react_task/run_task.py
