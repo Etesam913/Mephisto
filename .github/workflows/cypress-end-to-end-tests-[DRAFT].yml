@@ -35,7 +35,7 @@ jobs:
       - name: 📦 Setting up mephisto-task package
         run: |
           cd packages/mephisto-task
-          yarn install
+          yarn install --immutable
           yarn build
           npm link
 
