@@ -1,8 +1,8 @@
-name: cypress-end-to-end-tests
+name: cypress-end-to-end-tests-[DRAFT]
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [add-cypress-to-static-task]
 
 jobs:
   static-react-task:
@@ -32,12 +32,12 @@ jobs:
         run: |
           mephisto config core.main_data_directory ~/mephisto/data
 
-      #- name: 📦 Setting up mephisto-task package
-      #  run: |
-      #    cd packages/mephisto-task
-      #    yarn install
-      #    yarn build
-      #    npm link
+      - name: 📦 Setting up mephisto-task package
+        run: |
+          cd packages/mephisto-task
+          yarn install
+          yarn build
+          npm link
 
       - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
