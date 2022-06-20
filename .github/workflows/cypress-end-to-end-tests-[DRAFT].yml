@@ -32,9 +32,9 @@ jobs:
         run: |
           mephisto config core.main_data_directory ~/mephisto/data
 
-      - name: 📦 Setting up mephisto-task package
-        run: |
-          cd packages/mephisto-task
+      #- name: 📦 Setting up mephisto-task package
+      #  run: |
+      #    cd packages/mephisto-task
 
       - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
