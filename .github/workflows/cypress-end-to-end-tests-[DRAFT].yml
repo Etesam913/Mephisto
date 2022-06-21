@@ -64,6 +64,7 @@ jobs:
 
       - name: 📚 Acepting the submitted tip
         run: |
+          sleep 30s
           cd mephisto/scripts/local_db
           python review_tips_for_task.py << EOF
           react-static-task-with-tips
