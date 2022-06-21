@@ -60,18 +60,14 @@ jobs:
           wait-on: "http://localhost:3000/?worker_id=x&assignment_id=1"
           command-prefix: yarn dlx
           browser: chrome
-          headless: truecyp
+          headless: true
 
       - name: 📚 Acepting the submitted tip
         run: |
-          sleep 60 && 
-          sudo lsof -i tcp:3000 &&
-          curl http://localhost:3000 && 
           cd mephisto/scripts/local_db
+          bash test.sh
           python review_tips_for_task.py << EOF
           react-static-task-with-tips
           a
           n
           EOF
-
-     
