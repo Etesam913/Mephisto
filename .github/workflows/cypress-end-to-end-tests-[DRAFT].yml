@@ -42,9 +42,9 @@ jobs:
       - name: 📦 Setting up mephisto-worker-experience package
         run: |
           cd packages/mephisto-worker-experience
-          yarn install
+          npm install
           npm link mephisto-task
-          yarn build
+          npm run build
           npm link
 
       - name: ⌛️ Running cypress tests
