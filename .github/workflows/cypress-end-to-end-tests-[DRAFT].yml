@@ -64,9 +64,9 @@ jobs:
 
       - name: 📚 Acepting the submitted tip
         run: |
-          lsof -i tcp:3000
-          lsof -ti tcp:3000 | xargs kill
-          lsof -i tcp:3000
+          sudo lsof -i tcp:3000
+          sudo lsof -ti tcp:3000 | xargs kill -9
+          sudo lsof -i tcp:3000
           echo "killed off processes"
           cd mephisto/scripts/local_db
           python review_tips_for_task.py << EOF
