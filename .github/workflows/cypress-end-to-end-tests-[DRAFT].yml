@@ -61,3 +61,12 @@ jobs:
           command-prefix: yarn dlx
           browser: chrome
           headless: true
+
+      - name: 📚 Reviewing the submitted tip
+        run: |
+          cd mephisto/scripts/local_db
+          python review_tips_for_task << EOF
+          react-static-task-with-tips
+          a
+          n
+          EOF
