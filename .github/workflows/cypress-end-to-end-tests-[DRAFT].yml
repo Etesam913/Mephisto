@@ -72,7 +72,7 @@ jobs:
           n
           EOF
 
-      - name: ⌛️ Running cypress test to see if submitted ti shows after being accepted
+      - name: ⌛️ Running cypress test to see if submitted it shows after being accepted
         uses: cypress-io/github-action@v3.1.0
         with:
           install: false
