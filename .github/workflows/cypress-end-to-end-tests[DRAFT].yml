@@ -1,4 +1,4 @@
-name: cypress-end-to-end-tests
+name: [DRAFT]cypress-end-to-end-tests
 on:
   pull_request:
   push:
