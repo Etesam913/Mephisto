@@ -59,6 +59,7 @@ class DataBrowser:
             for assignment in assignments:
                 found_units = assignment.get_units()
                 for unit in found_units:
+                    print(unit)
                     if unit.get_status() in [
                         AssignmentState.COMPLETED,
                         AssignmentState.ACCEPTED,

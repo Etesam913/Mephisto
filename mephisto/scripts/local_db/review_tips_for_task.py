@@ -83,8 +83,9 @@ def main():
         task_name = input(
             "Enter the name of the task that you want to review the tips of: \n"
         )
-        print(task_name)
+
         print("")
+    print(task_name)
     units = mephisto_data_browser.get_all_units_for_task_name(task_name)
     if len(units) == 0:
         print("No units were received")
