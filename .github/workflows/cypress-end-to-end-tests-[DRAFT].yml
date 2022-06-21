@@ -60,7 +60,7 @@ jobs:
           wait-on: "http://localhost:3000/?worker_id=x&assignment_id=1"
           command-prefix: yarn dlx
           browser: chrome
-          headless: true
+          headless: truecyp
 
       - name: 📚 Acepting the submitted tip
         run: |
