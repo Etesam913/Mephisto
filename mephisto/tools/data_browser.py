@@ -55,6 +55,7 @@ class DataBrowser:
         units = []
         for task_run in task_runs:
             assignments = task_run.get_assignments()
+            print(len(assignments))
             for assignment in assignments:
                 found_units = assignment.get_units()
                 for unit in found_units:
