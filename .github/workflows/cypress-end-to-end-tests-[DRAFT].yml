@@ -56,7 +56,7 @@ jobs:
           project: ./examples/static_react_task_with_tips/webapp
           config-file: cypress.config.js
           spec: ./examples/static_react_task_with_tips/webapp/cypress/e2e/static_react_task_with_tips_pre_tip_submission.cy.js
-          start: python examples/static_react_task_with_tips/run_task.py mephisto.task.post_build_script=link_packages.sh
+          start: npm run gh-action:test
           wait-on: "http://localhost:3000/?worker_id=x&assignment_id=1"
           command-prefix: yarn dlx
           browser: chrome
