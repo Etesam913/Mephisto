@@ -2,7 +2,7 @@ name: cypress-end-to-end-tests-[DRAFT]
 on:
   pull_request:
   push:
-    branches: [add-cypress-to-static-task]
+    branches: [add-tests-for-tips-example]
 
 jobs:
   static-react-task:
@@ -39,13 +39,21 @@ jobs:
           yarn build
           npm link
 
+      - name: 📦 Setting up mephisto-worker-experience package
+        run: |
+          cd packages/mephisto-worker-experience
+          yarn install
+          npm link mephisto-task
+          yarn build
+          npm link
+
       - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
         with:
           install: false
           project: ./examples/static_react_task_with_tips/webapp
           config-file: cypress.config.js
-          start: python examples/static_react_task_with_tips/run_task.py mephisto.task.package_to_link_to=mephisto-task
+          start: python examples/static_react_task_with_tips/run_task.py mephisto.task.post_build_script=link_packages.sh
           wait-on: "http://localhost:3000/?worker_id=x&assignment_id=1"
           command-prefix: yarn dlx
           browser: chrome
