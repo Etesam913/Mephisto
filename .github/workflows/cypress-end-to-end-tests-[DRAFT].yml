@@ -49,7 +49,7 @@ jobs:
           npm run build
           npm link
 
-      - name: ⌛️ Running cypress tests
+      - name: ⌛️ Running cypress test to see if tip can be submitted
         uses: cypress-io/github-action@v3.1.0
         with:
           install: false
@@ -62,11 +62,24 @@ jobs:
           browser: chrome
           headless: true
 
-      - name: 📚 Reviewing the submitted tip
+      - name: 📚 Acepting the submitted tip
         run: |
           cd mephisto/scripts/local_db
-          python review_tips_for_task << EOF
+          python review_tips_for_task.py << EOF
           react-static-task-with-tips
           a
           n
           EOF
+
+      - name: ⌛️ Running cypress test to see if submitted ti shows after being accepted
+        uses: cypress-io/github-action@v3.1.0
+        with:
+          install: false
+          project: ./examples/static_react_task_with_tips/webapp
+          config-file: cypress.config.js
+          spec: ./examples/static_react_task_with_tips/webapp/cypress/e2e/static_react_task_with_tips_post_tip_submission.cy.js
+          start: python examples/static_react_task_with_tips/run_task.py mephisto.task.post_build_script=link_packages.sh mephisto.task.force_rebuild=true
+          wait-on: "http://localhost:3000/?worker_id=x&assignment_id=1"
+          command-prefix: yarn dlx
+          browser: chrome
+          headless: true
