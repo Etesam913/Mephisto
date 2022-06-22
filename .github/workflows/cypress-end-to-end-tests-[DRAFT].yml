@@ -73,6 +73,7 @@ jobs:
           echo "killed 2"
           sleep 60
           echo "60 seconds passed"
+          lsof -nPi :3000
 
       - name: 📚 Acepting the submitted tip
         run: |
