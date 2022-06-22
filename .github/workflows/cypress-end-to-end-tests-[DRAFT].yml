@@ -71,8 +71,12 @@ jobs:
           sleep 0.5
           kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
           echo "killed 2"
-          sleep 60
-          echo "60 seconds passed"
+          sleep 30
+          echo "30 seconds passed"
+          lsof -nPi :3000
+          kill -INT $(lsof -i -P -n | grep LISTEN | grep node | awk '{print $2}')
+          sleep 30
+          echo "30 seconds passed"
           lsof -nPi :3000
 
       - name: 📚 Acepting the submitted tip
