@@ -66,9 +66,9 @@ jobs:
         run: |
           lsof -nPi :3000
           lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}'
-          KILL -INT $(lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}')
+          kill -INT $(lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}')
           sleep 0.5
-          KILL -INT $(lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}')
+          kill -INT $(lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}')
 
       - name: 📚 Acepting the submitted tip
         run: |
