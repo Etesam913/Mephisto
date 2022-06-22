@@ -71,15 +71,8 @@ jobs:
           sleep 0.5
           kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
           echo "killed 2"
-          sleep 0.5
-          kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
-          echo "killed 3"
-          sleep 0.5
-          kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
-          echo "killed 4"
-          sleep 0.5
-          kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
-          echo "killed 5"
+          sleep 20
+          echo "20 seconds passed"
 
       - name: 📚 Acepting the submitted tip
         run: |
