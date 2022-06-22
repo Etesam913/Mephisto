@@ -66,6 +66,10 @@ jobs:
         run: |
           lsof -nPi :3000
           kill -INT $(lsof -i:3000 | awk 'NR==2 {print $2}')
+          sleep 10
+          kill -INT $(lsof -i:3000 | awk 'NR==2 {print $2}')
+          sleep 5
+          lsof -nPi :3000
 
       - name: 📚 Acepting the submitted tip
         run: |
