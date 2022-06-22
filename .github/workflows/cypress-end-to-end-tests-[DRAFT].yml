@@ -65,12 +65,10 @@ jobs:
       - name: 🔪 Killing the web server
         run: |
           lsof -nPi :3000
-          alias magic="lsof -i -P -n | grep LISTEN | grep "
-          magic Python
-          magic Python | awk '{print $2}'
-          kill -INT $(magic Python | awk '{print $2}')
+          lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}'
+          KILL -INT $(lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}')
           sleep 0.5
-          kill -INT $(magic Python | awk '{print $2}')
+          KILL -INT $(lsof -i -P -n | grep LISTEN | grep Python | awk '{print $2}')
 
       - name: 📚 Acepting the submitted tip
         run: |
