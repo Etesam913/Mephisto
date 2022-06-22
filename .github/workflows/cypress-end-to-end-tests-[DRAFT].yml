@@ -73,10 +73,13 @@ jobs:
           echo "killed 2"
           sleep 0.5
           kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
+          echo "killed 3"
           sleep 0.5
           kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
+          echo "killed 4"
           sleep 0.5
           kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
+          echo "killed 5"
 
       - name: 📚 Acepting the submitted tip
         run: |
