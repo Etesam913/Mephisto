@@ -52,7 +52,7 @@ jobs:
          
       - name: 📂 Unzipping packages.zip
         run: |
-          unzip packages.zip
+          gzip -d packages.zip
           rm packages.zip
       
       - name: 🔎 Check is downloaded
