@@ -7,9 +7,24 @@ on:
 jobs:
   install: 
     runs-on: ubuntu-latest
-  steps:
+    steps:
       - name: 🔀 Checking out repo
         uses: actions/checkout@v2
+        
+      - name: 🪨 Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      
+      - name: 📦 Installing packages
+        run: yarn build-all
+      
+      - name: ☝️ Uploading yarn packages
+        uses: actions/upload-artifact@v3.1.0
+        with: 
+          name: yarn-packages
+          path: ./.yarn/
+        
 
   static-react-task:
     runs-on: ubuntu-latest
@@ -17,6 +32,18 @@ jobs:
     steps:
       - name: 🔀 Checking out repo
         uses: actions/checkout@v2
+        
+      - name: 👇 Downloading yarn packages
+        uses: actions/download-artifact@v3
+        with:
+          name: yarn-packages
+          
+      - name: 🔎 Check is downloaded
+        run: |
+          ls -a
+          cd .yarn
+          ls -a
+        
       - name: 🐍 Installing python
         uses: actions/setup-python@v2
 
@@ -40,13 +67,8 @@ jobs:
         run: |
           mephisto config core.main_data_directory ~/mephisto/data
 
-      - name: 📦 Setting up mephisto-task package
-        run: |
-          cd packages/mephisto-task
-          yarn install
-          yarn build
-          npm link
-
+      
+      
       - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
         with:
