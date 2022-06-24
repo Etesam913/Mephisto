@@ -75,6 +75,11 @@ jobs:
           kill -INT $(lsof -i -P -n | grep LISTEN | grep node | awk '{print $2}')
           echo "30 seconds passed"
 
+      - name: Expiring units
+        run: |
+          cd mephisto/scripts/local_db
+          python expire_all_units.py
+        
       - name: 📚 Acepting the submitted tip
         run: |
           cd mephisto/scripts/local_db
