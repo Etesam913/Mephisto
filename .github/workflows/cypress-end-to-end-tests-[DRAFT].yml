@@ -52,8 +52,9 @@ jobs:
          
       - name: 📂 Unzipping packages.zip
         run: |
-          gzip -d packages.zip
-          rm packages.zip
+          mv packages.zip packages.gz
+          gzip -d packages.gz
+          rm packages.gz
       
       - name: 🔎 Check is downloaded
         run: |
