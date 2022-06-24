@@ -15,8 +15,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16
+          
+      - name: 🤖 Installing Mephisto
+        run: |
+          pip install -e .
+          pip install detoxify
+          pip show detoxify
       
-      - name: 📦 Installing & building packages
+      - name: 📦 Installing & building yarn packages
         run: |
           cd packages/mephisto-task
           yarn install
@@ -24,19 +30,23 @@ jobs:
           cd ../mephisto-worker-experience
           yarn install
           yarn build
+
       - name: 🤐 Zip .yarn to prepare for uploading
         run: 7z a yarn-packages.zip .yarn/
+
       - name: ☝️ Uploading yarn packages
         uses: actions/upload-artifact@v3.1.0
         with: 
           name: yarn-packages
           path: ./yarn-packages.zip
           
-      - name: 🗑 Removing zip
+      - name: 🗑 Removing yarn-packages.zip
         run: |
           ls
           rm yarn-packages.zip
           ls
+      
+        
 
   static-react-task:
     runs-on: ubuntu-latest
@@ -50,7 +60,7 @@ jobs:
         with:
           name: yarn-packages
          
-      - name: 📂 Unzipping packages.zip
+      - name: 📂 Unzipping packages.zip in .yarn
         run: |
           mv yarn-packages.zip .yarn/yarn-packages.zip
           cd .yarn
@@ -84,12 +94,11 @@ jobs:
           mkdir mephisto
           cd mephisto
           mkdir data
+          
       - name: 📂 Set the data directory
         run: |
           mephisto config core.main_data_directory ~/mephisto/data
 
-      
-      
       - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
         with:
