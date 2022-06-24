@@ -23,7 +23,7 @@ jobs:
           pip list -v
           
       - name: 🤐 Zip python packages
-        run: 7z a python-packages.zip ~/home/runner/.local/lib/python3.8/site-packages
+        run: 7z a python-packages.zip $HOME/runner/.local/lib/python3.8/site-packages
       
       - name: ☝️ Uploading python packages
         uses: actions/upload-artifact@v3.1.0
