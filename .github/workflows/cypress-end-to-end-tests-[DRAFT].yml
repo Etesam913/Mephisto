@@ -18,8 +18,12 @@ jobs:
       
       - name: 📦 Installing & building packages
         run: |
+          cd packages/mephisto-task
           yarn install
-          yarn build-all
+          yarn build
+          cd ../mephisto-worker-experience
+          yarn install
+          yarn build
       
       - name: ☝️ Uploading yarn packages
         uses: actions/upload-artifact@v3.1.0
