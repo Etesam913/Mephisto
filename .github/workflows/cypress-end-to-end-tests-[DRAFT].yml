@@ -49,7 +49,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: yarn-packages
-          
+         
+      - name: 📂 Unzipping packages.zip
+        run: |
+          unzip packages.zip
+          rm packages.zip
+      
       - name: 🔎 Check is downloaded
         run: |
           ls -a
