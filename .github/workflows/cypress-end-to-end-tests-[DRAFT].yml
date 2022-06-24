@@ -74,7 +74,6 @@ jobs:
           lsof -i -P -n | grep LISTEN | grep node | awk '{print $2}'
           kill -INT $(lsof -i -P -n | grep LISTEN | grep node | awk '{print $2}')
           echo "30 seconds passed"
-          lsof -nPi :3000
 
       - name: 📚 Acepting the submitted tip
         run: |
