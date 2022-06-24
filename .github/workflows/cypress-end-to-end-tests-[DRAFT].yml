@@ -20,7 +20,7 @@ jobs:
         run: |
           pip install -e .
           pip install detoxify
-          pip show detoxify
+          pip list -v
       
       - name: 📦 Installing & building yarn packages
         run: |
