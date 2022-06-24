@@ -2,7 +2,7 @@ name: cypress-end-to-end-tests-[DRAFT]
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [add-tests-for-tips-example]
 
 jobs:
   install: 
