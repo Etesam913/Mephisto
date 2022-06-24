@@ -21,7 +21,16 @@ jobs:
           pip install -e .
           pip install detoxify
           pip list -v
+          
+      - name: 🤐 Zip python packages
+        run: 7z a python-packages.zip ~/home/runner/.local/lib/python3.8/site-packages
       
+      - name: ☝️ Uploading python packages
+        uses: actions/upload-artifact@v3.1.0
+        with: 
+          name: python-packages
+          path: ./python-packages.zip
+          
       - name: 📦 Installing & building yarn packages
         run: |
           cd packages/mephisto-task
@@ -60,7 +69,7 @@ jobs:
         with:
           name: yarn-packages
          
-      - name: 📂 Unzipping packages.zip in .yarn
+      - name: 📂 Unzipping yarn-packages.zip in .yarn
         run: |
           mv yarn-packages.zip .yarn/yarn-packages.zip
           cd .yarn
@@ -83,10 +92,24 @@ jobs:
         with:
           node-version: 16
 
-      - name: 🤖 Install Mephisto
+      #- name: 🤖 Install Mephisto
+      #  run: |
+      #    pip install -e .
+      #    pip install detoxify
+      
+      - name: 👇 Downloading python packages
+        uses: actions/download-artifact@v3
+        with:
+          name: python-packages
+      
+      - name: 📂 Unzipping python-packages.zip in .site-packages
         run: |
-          pip install -e .
-          pip install detoxify
+          mv python-packages.zip ~/home/runner/.local/lib/python3.8/site-packages/python-packages.zip
+          cd ~/home/runner/.local/lib/python3.8/site-packages/
+          7z e python-packages.zip << EOF 
+          A
+          EOF
+          rm python-packages.zip
 
       - name: 🖋 Create data directory
         run: |
