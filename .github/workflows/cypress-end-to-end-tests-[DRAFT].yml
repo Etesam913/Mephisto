@@ -2,12 +2,18 @@ name: cypress-end-to-end-tests-[DRAFT]
 on:
   pull_request:
   push:
-    branches: [add-tests-for-tips-example]
+    branches: [main]
 
 jobs:
-  static-react-task_with_tips:
+  install: 
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  steps:
+      - name: 🔀 Checking out repo
+        uses: actions/checkout@v2
+
+  static-react-task:
+    runs-on: ubuntu-latest
+    needs: install
     steps:
       - name: 🔀 Checking out repo
         uses: actions/checkout@v2
@@ -41,57 +47,13 @@ jobs:
           yarn build
           npm link
 
-      - name: 📦 Setting up mephisto-worker-experience package
-        run: |
-          cd packages/mephisto-worker-experience
-          npm install
-          npm link mephisto-task
-          npm run build
-          npm link
-
-      - name: ⌛️ Running cypress test to see if tip can be submitted
+      - name: ⌛️ Running cypress tests
         uses: cypress-io/github-action@v3.1.0
         with:
           install: false
-          project: ./examples/static_react_task_with_tips/webapp
-          config-file: cypress.config.js
-          spec: ./examples/static_react_task_with_tips/webapp/cypress/e2e/static_react_task_with_tips_pre_tip_submission.cy.js
-          start: python ./examples/static_react_task_with_tips/run_task.py mephisto.task.post_build_script=link_packages.sh mephisto.task.force_rebuild=true
+          project: ./examples/static_react_task/webapp
+          config-file: ./cypress.config.js
+          start: python examples/static_react_task/run_task.py mephisto.task.post_build_script=link_mephisto_task.sh
           wait-on: "http://localhost:3000/?worker_id=x&assignment_id=1"
           command-prefix: yarn dlx
-          browser: chrome
-          headless: true
-
-      - name: 🔪 Killing the web server
-        run: |
-          lsof -nPi :3000
-          lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}'
-          kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
-          echo "killed 1"
-          sleep 30
-          kill -INT $(lsof -i -P -n | grep LISTEN | grep python | awk '{print $2}')
-          echo "killed 2"
-          sleep 30
-          lsof -nPi :3000
-
-      - name: 📚 Acepting the submitted tip
-        run: |
-          cd mephisto/scripts/local_db
-          python review_tips_for_task.py << EOF
-          react-static-task-with-tips
-          a
-          n
-          EOF
-
-      - name: ⌛️ Running cypress test to see if submitted it shows after being accepted
-        uses: cypress-io/github-action@v3.1.0
-        with:
-          install: false
-          project: ./examples/static_react_task_with_tips/webapp
-          config-file: cypress.config.js
-          spec: ./examples/static_react_task_with_tips/webapp/cypress/e2e/static_react_task_with_tips_post_tip_submission.cy.js
-          start: python examples/static_react_task_with_tips/run_task.py mephisto.task.post_build_script=link_packages.sh mephisto.task.force_rebuild=true
-          wait-on: "http://localhost:3000/?worker_id=x&assignment_id=1"
-          command-prefix: yarn dlx
-          browser: chrome
           headless: true
