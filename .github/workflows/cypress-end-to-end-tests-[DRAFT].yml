@@ -53,7 +53,7 @@ jobs:
       - name: 📂 Unzipping packages.zip
         run: |
           mv packages.zip packages.gz
-          gzip -d packages.gz
+          gunzip -d packages.gz
           rm packages.gz
       
       - name: 🔎 Check is downloaded
