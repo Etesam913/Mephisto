@@ -24,13 +24,19 @@ jobs:
           cd ../mephisto-worker-experience
           yarn install
           yarn build
-      
+      - name: 🤐 Zip .yarn to prepare for uploading
+        run: zip -r packages.zip ./.yarn/
       - name: ☝️ Uploading yarn packages
         uses: actions/upload-artifact@v3.1.0
         with: 
           name: yarn-packages
-          path: ./.yarn/
-        
+          path: ./packages.zip
+          
+      - name: 🗑 Removing zip
+        run: |
+          ls
+          rm packages.zip
+          ls
 
   static-react-task:
     runs-on: ubuntu-latest
