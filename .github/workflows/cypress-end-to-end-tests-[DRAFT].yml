@@ -52,6 +52,9 @@ jobs:
          
       - name: 📂 Unzipping packages.zip
         run: |
+          rm -r .yarn
+          mkdir .yarn
+          cd .yarn
           7z e yarn-packages.zip << EOF 
           A
           EOF
