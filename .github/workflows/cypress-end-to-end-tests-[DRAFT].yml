@@ -54,6 +54,7 @@ jobs:
         run: |
           rm -r .yarn
           mkdir .yarn
+          mv yarn-packages.zip .yarn/yarn-packages.zip
           cd .yarn
           7z e yarn-packages.zip << EOF 
           A
