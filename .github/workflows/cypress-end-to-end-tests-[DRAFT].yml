@@ -30,12 +30,12 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with: 
           name: yarn-packages
-          path: ./packages.zip
+          path: ./yarn-packages.zip
           
       - name: 🗑 Removing zip
         run: |
           ls
-          rm packages.zip
+          rm yarn-packages.zip
           ls
 
   static-react-task:
